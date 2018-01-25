@@ -1,3 +1,5 @@
+# The Death of Microservice Madness in 2018
+
 Microservices became a very popular topic in over the last couple of years[^1]. 'Microservice madness' goes something like this:
 
 > Netflix are great at devops.
@@ -96,7 +98,7 @@ Image a user uploads a video in the video sharing service. We might need to run 
 
 This retry logic can get hard to manage. Trying to do things synchronously often ends up being untenable, there are too many points of failure. In this case, a more reliable solution is to use asynchronous patterns to handle communication. The challenge here is that asynchronous patterns inherently make a system stateful. As mentioned in the previous point, stateful systems and systems with distributed state are very hard to handle.
 
-When a microservice system uses messaging or queues for intra-service communication, you essentially have a large database (the message queue or broker) glueing the services together. Again, although it might not seem like a challenge at first, schema will come back to bite you. A service at version X might write a message with a certain format, services which depend on this message will also need to be updated when the sending service changes the details of the message it sends.
+When a microservice system uses message queues for intra-service communication, you essentially have a large database (the message queue or broker) glueing the services together. Again, although it might not seem like a challenge at first, schema will come back to bite you. A service at version X might write a message with a certain format, services which depend on this message will also need to be updated when the sending service changes the details of the message it sends.
 
 It is possible to have services which can handle messages in many different formats, but this is hard to manage. Now when deploying new versions of services, you will have times where two different versions of a service may be trying to process messages from the same queue, perhaps even messages sent by different versions of a sending service. This can lead to complicated edge cases. To avoid these edge cases, it may be easier to only allow certain versions of messages to exist, meaning that you need to deploy a set of versions of a set of services as a coherent whole, ensuring messages of older versions are drained appropriately first.
 
@@ -144,7 +146,10 @@ Microservices relate in many ways more to the technical processes around packagi
 
 Regardless of the size of your services, whether they are in Docker containers or not, you will always need to think carefully about how to put a system together. There are no right answers, and there are a *lot* of options.
 
-I hope you found this article interesting! As always, please do comment below if you have any questions or thoughts.
+I hope you found this article interesting! As always, please do comment below if you have any questions or thoughts. You can also follow some lively discussions on:
+
+- [Reddit - The Death of Microservice Madness](https://www.reddit.com/r/programming/comments/7pxriw/the_death_of_microservice_madness_in_2018/)
+- [Hacker News - The Death of Microservice Madness](https://news.ycombinator.com/item?id=16200007)
 
 ## Appendix: Further Reading
 
@@ -152,6 +157,8 @@ The following links might be of interest:
 
 - [Martin Fowler - Bounded Context](https://martinfowler.com/bliki/BoundedContext.html) - Martin's articles are great, I'd thoroughly recommend this.
 - [Martin Fowler - Microservices](https://martinfowler.com/articles/microservices.html) - An often recommended introduction to the pattern.
+- [Microservices - Good or Bad?](https://r2m.se/microservices-good-or-bad/) - Björn Frantzén's thoughts on microservices, after reading this article.
+- [When Not To Do Microservices](http://blog.christianposta.com/microservices/when-not-to-do-microservices/) - Excellent post on the topic from Christian Posta
 - [Dave Kerr - Microservices to Monoliths - Practical tips for CI/CD and DevOps in the Microservice world](https://youtu.be/NVb7aljfKYo?t=6657) - A recent conference presentation I did on devops with microservices.
 
 Please do share anything else you think makes great reading or watching on the topic!
