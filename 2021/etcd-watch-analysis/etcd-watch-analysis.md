@@ -25,4 +25,4 @@ key 被放进了`watchRequest`中，watchRequest 中有个 `retc`，最终会把
 
 
 
-![etcd_watch_procedure](etcd_watch_procedure.png)
+![etcd-watch-analysis](etcd-watch-analysis.png)
